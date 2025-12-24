@@ -1,5 +1,15 @@
 # ----------------------------------------------------------------
-# 1. Check the 
+# Steps evolves
+# 1.  Fetch the URL page no
+# 2.  Count how many cards are present
+# 3.  Extract product links
+# 4.  Make sure the product is not null
+# 5.  Extract product details
+# 6.  Extract technical details
+# 7.  Fetch the data from the url
+# 8.  Do all of this in loop
+# 9.  Save the csv files on each page 
+# 10. Log all the process thorough the loguru
 # ----------------------------------------------------------------
 
 import os
@@ -11,7 +21,7 @@ from curl_cffi import requests
 from bs4 import BeautifulSoup
 
 # ----------------------------------------------------------------
-#                          Simple Logging
+#                       Simple Logging & User Agent
 # ----------------------------------------------------------------
 logger.remove()
 
@@ -36,6 +46,9 @@ HEADERS = {
     "Upgrade-Insecure-Requests": "1",
 }
 
+# ----------------------------------------------------------------
+#                        Search page & count cards
+# ----------------------------------------------------------------
 def get_search_page(page_no):
     """Fetch Amazon search result page"""
     url = f"https://www.amazon.in/s?k=laptop&page={page_no}"
@@ -49,6 +62,9 @@ def count_page_cards(soup):
     )
     return len(cards)
 
+# ----------------------------------------------------------------
+#                Extract product links & Safe Text
+# ----------------------------------------------------------------
 def extract_product_links(soup):
     """Full link of the product"""
     links = []
@@ -75,6 +91,9 @@ session.get(
     impersonate="chrome120"
 )
 
+# ----------------------------------------------------------------
+#                    Extract Product Details
+# ----------------------------------------------------------------
 def extract_product_details(new_soup):
     """Help to Clean the table data"""
     
@@ -98,6 +117,9 @@ def extract_product_details(new_soup):
             
     return product_details
 
+# ----------------------------------------------------------------
+#                   Extract Technical Details
+# ----------------------------------------------------------------
 def extract_technical_details(new_soup):
     """More technical stuff about the laptop"""
     
@@ -125,7 +147,9 @@ def extract_technical_details(new_soup):
             
     return technical_details
 
-
+# ----------------------------------------------------------------
+#                    Fetch URL & Data
+# ----------------------------------------------------------------
 def fetch_url_data(url):
     """Fetch each url"""
     #url = extract_product_links(soup)
@@ -186,8 +210,11 @@ def fetch_data(new_soup):
     
     return data
 
-START_PAGE = 3
-END_PAGE = 5
+# ----------------------------------------------------------------
+#               Do in the Loops with logging
+# ----------------------------------------------------------------
+START_PAGE = 6
+END_PAGE = 10
 
 for page in range(START_PAGE, END_PAGE +1):
     logger.info(f"Scrapping page {page}")
@@ -205,7 +232,7 @@ for page in range(START_PAGE, END_PAGE +1):
             data = fetch_data(product_soup)
             page_data.append(data)
             
-            time.sleep(random.uniform(3, 10))
+            time.sleep(random.uniform(5, 30))
             
         except Exception as e:
             logger.error(f"    --->>> Error: {e}")

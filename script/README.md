@@ -3,7 +3,7 @@
 !!![INFO] Python Script for the automate the process
 
 1. **Scraping Data**
-    - [Notebook Links](../script/scraping_data.py)
+    - [Notebook Links](../script/01_scraping_data.py)
    1. Fetch the URL page no
    2. Count how many cards are present
    3. Extract product links
@@ -16,7 +16,13 @@
    10.  all the process thorough the loguru
    
 2.   **Check Null Values**
-     - [Notebook Link](../script/check_null_values.py)
+     - [Notebook Link](../script/02_check_null_values.py)
      - For each page one dataset is available
      - So to check the null values
      - Which columns contain the null value this script is used
+
+3. **Feature Cleaning**
+     - [Notebook Link](../script/03_feature_cleaning.py)
+     - All the columns clean in the single script 
+     - If you want to lean the breakdown and the logic behind each cleaning
+     - Then visit [Data Cleaning Notebook](../notebooks/data-cleaning/)

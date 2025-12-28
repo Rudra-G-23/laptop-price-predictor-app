@@ -23,8 +23,11 @@ try:
         
         dl = pl.read_csv(path)
         
-        for col in dl.columns:
-            logger.info(f"{col}: {dl[col].null_count()}")
+        #logger.info(f"{dl['os'].to_list()}")
+        #logger.info(f"{dl['cpu_model'].to_list()}")
+        
+        #for col in dl.columns:
+        #    logger.info(f"{col}: {dl[col].null_count()}")
             
 except Exception as e:
     logger.error(f"     --->>> {e}")

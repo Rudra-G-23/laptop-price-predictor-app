@@ -8,6 +8,7 @@ dependencies = [
     "beautifulsoup4>=4.14.3",
     "bs4>=0.0.2",
     "curl-cffi>=0.14.0",
+    "dvc>=3.65.0",
     "loguru>=0.7.3",
     "lxml>=6.0.2",
     "matplotlib>=3.10.8",
